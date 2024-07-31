@@ -1,25 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
+import { ScrollContext } from "../../context/scrollContext";
 const Navbar = () => {
-  const [scroll, setScroll] = useState<boolean>(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY; // Obtiene la posición de scroll vertical
-      if (scrollPosition > 0) {
-        setScroll(true);
-      } else {
-        setScroll(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    // Limpia el event listener al desmontar el componente
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const { scroll } = useContext(ScrollContext) as { scroll: boolean }
+  console.log(scroll)
   return (
     <nav className="nav">
       <div className={`wrapper ${scroll ? "scrolling" : "scrollStop"}`}>

@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import newRequest from "../../uitl/request";
+import newRequest from "../../util/request";
 import "./Photos.scss";
 import Card from "../../components/Card/Card";
+import Loader from "../../components/Loader/Loader";
 const Photos = () => {
   const { error, isLoading, data } = useQuery({
     queryKey: ["photos"],
@@ -15,7 +16,7 @@ const Photos = () => {
       {error ? (
         <p>Something went wrong</p>
       ) : isLoading ? (
-        <p>Loading...</p>
+        <Loader />
       ) : (
         data.map((e: any) => <Card key={e.id} data={e} />)
       )}

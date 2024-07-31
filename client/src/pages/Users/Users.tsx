@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import newRequest from "../../uitl/request";
+import newRequest from "../../util/request";
 const Users = () => {
   const { error, isLoading, data } = useQuery({
     queryKey: ["users"],
@@ -10,11 +10,12 @@ const Users = () => {
   });
   return (
     <div>
-      {isLoading ? (
-        <span>Loading...</span>
-      ) : (
-        data.map((e: any) => <span key={e.id}>{e.id}</span>)
-      )}
+      {error ? <p>Something went wrong</p>
+        : isLoading ? (
+          <span>Loading...</span>
+        ) : (
+          data.map((e: any) => <span key={e.id}>{e.id}</span>)
+        )}
     </div>
   );
 };
